@@ -15,24 +15,19 @@ struct Population {
 struct Population pop;
 
 void initPop() {
-    unsigned int i = 0;
-    while (i < N) {
+    for (unsigned int i = 0; i < N; i++) {
         pop.type[i] = rand() % 2;	// either 0 (if rand return is even), or 1 (otherwise)
         pop.x[i] = rand() % X_MAX + 1;
         pop.y[i] = rand() % Y_MAX + 1;
-        i++;
     }
 
     return;
 }
 
 void updatePlot(FILE *gp) {
-
-    unsigned int i = 0;
-    while (i < N) {
+    for (unsigned int i = 0; i < N; i++) {
         fprintf(gp, "replot\n");
         fprintf(gp, "%g %g %g\n", pop.x[i], pop.y[i], pop.type[i]);
-        i++;
     }
 
     return;
