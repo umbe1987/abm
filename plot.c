@@ -5,7 +5,7 @@
 #define X_MAX 100
 #define Y_MAX 100
 #define N 1000		// number of agents
-#define K 10		// number of iteration
+#define K 1000		// number of iteration
 
 struct Population {
     unsigned int type[N];
@@ -37,13 +37,13 @@ void updatePlot(FILE *gp, unsigned int iter) {
     }
     fclose(data);
 
+    fprintf(gp,"set title \"%d\"\n", iter);
     if (iter == 0) {
         fprintf(gp, "plot 'data' using 1:2:3 palette\n");
     } else {
         fprintf(gp, "replot\n");
     }
     fflush(gp);
-    sleep(1);
 
     return;
 }
@@ -61,6 +61,7 @@ int main() {
     for (unsigned int i = 0; i < K; i++) {
         updatePop();
         updatePlot(gp, i);
+        usleep(25000);
     }
     pclose(gp);
 
