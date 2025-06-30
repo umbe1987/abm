@@ -7,17 +7,17 @@
 #define N 1000		// number of agents
 #define K 1000		// number of iteration
 
-struct Population {
-    unsigned int type[N];
-    unsigned int x[N];
-    unsigned int y[N];
+struct Agent {
+    unsigned int type;
+    unsigned int x;
+    unsigned int y;
 };
 
-struct Population pop;
+struct Agent pop[N];
 
 void initPop() {
     for (unsigned int i = 0; i < N; i++) {
-        pop.type[i] = rand() % 2;	// either 0 (if rand return is even), or 1 (otherwise)
+        pop[i].type = rand() % 2;	// either 0 (if rand return is even), or 1 (otherwise)
     }
 
     return;
@@ -25,15 +25,15 @@ void initPop() {
 
 void updatePop() {
     for (unsigned int i = 0; i < N; i++) {
-        pop.x[i] = rand() % X_MAX + 1;
-        pop.y[i] = rand() % Y_MAX + 1;
+        pop[i].x = rand() % X_MAX + 1;
+        pop[i].y = rand() % Y_MAX + 1;
     }
 }
 
 void updatePlot(FILE *gp, unsigned int iter) {
     FILE *data = fopen("data", "w+");
     for (unsigned int i = 0; i < N; i++) {
-        fprintf(data, "%d %d %d\n", pop.x[i], pop.y[i], pop.type[i]);
+        fprintf(data, "%d %d %d\n", pop[i].x, pop[i].y, pop[i].type);
     }
     fclose(data);
 
